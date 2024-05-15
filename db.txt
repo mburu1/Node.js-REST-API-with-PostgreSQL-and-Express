@@ -1,0 +1,35 @@
+CREATE DATABASE BlogAPI;
+
+r \c BlogAPI
+psql -d BlogAPI
+
+
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE Posts (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    user_id INTEGER REFERENCES Users(id)
+);
+
+-- Inserting into Users table
+INSERT INTO Users (username, email) VALUES
+('user1', 'user1@example.com'),
+('user2', 'user2@example.com');
+
+-- Inserting into Posts table
+INSERT INTO Posts (title, content, user_id) VALUES
+('Post 1', 'Content of Post 1', 1),
+('Post 2', 'Content of Post 2', 1),
+('Post 3', 'Content of Post 3', 2);
+
+SELECT * FROM Users;
+
+SELECT * FROM Posts;
+
+SELECT rolname FROM pg_roles;
